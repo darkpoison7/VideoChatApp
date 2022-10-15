@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .title {
+        font-family: "Montserrat", sans-serif !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex w-screen justify-center mt-52">
+      <div>
+        <h1 class="text-5xl font-bold title">Video Chat App</h1>
+
+        <div class="mt-16 flex flex-row h-12 gap-4">
+          <input
+            required
+            id="roomCode"
+            type="text"
+            autocomplete="off"
+            placeholder="Enter room code"
+            class="bg-purple-100 text-purple-900 text-sm rounded-lg focus:border focus:ring-purple-900 focus:border-purple-500 block w-full p-2.5"
+          />
+          <button
+            id="joinButton"
+            class="w-16 bg-purple-500 text-white py-2 rounded-md h-full hover:bg-purple-300 hover:text-purple-900"
+          >
+            Join
+          </button>
+        </div>
+
+        <a
+          href="/create"
+          class="block text-center w-full mt-5 py-2 rounded-lg bg-purple-50 border-purple-500 text-purple-900 border hover:bg-purple-300 hover:text-white hover:border-0"
+        >
+          Create Room
+        </a>
+
+        <h3 class="mt-52 text-md text-center">Developed by Tahir Ali</h3>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+      integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const socket = io();
+      var roomCode = document.getElementById("roomCode");
+      var joinButton = document.getElementById("joinButton");
+
+      socket.on("connect", () => {
+        console.log("[+] Connected");
+      });
+
+      joinButton.addEventListener("click", (e) => {
+        document.location.href = "/room/" + roomCode.value;
+      });
+    </script>
+  </body>
+</html>
